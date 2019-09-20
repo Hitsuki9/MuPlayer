@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>mu-player</title>
+</head>
+<body style="margin: 0 50px;">
+  <h1>mu-player</h1>
+  <div id="mu-player"></div>
+  <script src="MuPlayer.js"></script>
+  <script>
+    const options = {
+      container: document.querySelector('#mu-player'),
+      audios: [{
+        name: 'ウルフ',
+        artist: 'CHiCO with HoneyWorks',
+        url: 'assets/audio/ウルフ.mp3',
+        cover: 'assets/cover/wolf.jpg',
+        theme: '#ebd0c2'
+      },{
+        name: 'フレスベルグの少女～風花雪月～',
+        artist: 'Caro',
+        url: 'assets/audio/フレスベルグの少女.mp3',
+        cover: 'assets/cover/fireEmblem.png',
+        theme: '#ebd0c2'
+      }, {
+        name: '愛にできることはまだあるかい',
+        artist: '獅子神レオナ',
+        url: 'assets/audio/愛にできることはまだあるかい.mp3',
+        cover: 'assets/cover/天气之子.jpg',
+        theme: '#ebd0c2'
+      }, {
+        name: 'Connexion',
+        artist: 'R!n/Gemie',
+        url: 'assets/audio/Connexion.mp3',
+        cover: 'assets/cover/connexion.jpg',
+        theme: '#ebd0c2'
+      }, {
+        name: '勾指起誓',
+        artist: '鹿乃',
+        url: 'assets/audio/勾指起誓.mp3',
+        cover: 'assets/cover/2比3.jpg',
+        theme: '#ebd0c2'
+      }, {
+        name: 'シンセカイ案内所',
+        artist: '初音ミク',
+        url: 'assets/audio/シンセカイ案内所.mp3',
+        cover: 'assets/cover/2比3.jpg',
+        theme: '#ebd0c2'
+      }, {
+        name: '愛言葉Ⅲ',
+        artist: '黒兎ウル',
+        url: 'assets/audio/愛言葉Ⅲ.mp3',
+        cover: 'assets/cover/2比3.jpg',
+        theme: '#ebd0c2'
+      }, {
+        name: '歌に形はないけれど',
+        artist: '獅子神レオナ',
+        url: 'assets/audio/歌に形はないけれど.mp3',
+        cover: 'assets/cover/2比3.jpg',
+        theme: '#ebd0c2'
+      }],
+      lrcType: 0,
+      listMaxLength: 4
+    }
+    const muPlayer = new MuPlayer(options)
+    let handle = {
+      bind () {
+        muPlayer.on('lrcshow', function () {
+          console.log(this)
+        })
+      }
+    }
+    handle.bind()
+    // options.container.requestFullscreen().catch(err = {})
+  </script>
+</body>
+</html>
