@@ -15,10 +15,10 @@ $bar-background-color: #999;
     align-items: center;
   }
 
-  .position-repair {
-    svg {
-      left: 0 !important;
-    }
+  .flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .mu-player-button {
@@ -29,9 +29,8 @@ $bar-background-color: #999;
     background: rgba(0, 0, 0, .1);
     svg {
       position: absolute;
-      left: 1px;
-      width: inherit;
-      height: inherit;
+      width: 70%;
+      height: 70%;
       path {
         fill: #fff;
       }
@@ -83,9 +82,6 @@ $bar-background-color: #999;
 
   .mu-player-pause {
     opacity: 0;
-    svg {
-      left: 0;
-    }
   }
 
   .mu-player-audio {

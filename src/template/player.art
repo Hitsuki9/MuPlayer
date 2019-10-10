@@ -1,6 +1,6 @@
 <div class="mu-player-body">
   <div class="mu-player-cover" style="background-image: url('')">
-    <div class="mu-player-button mu-player-play">{{@ icons.play }}</div>
+    <div class="flex-center mu-player-button mu-player-play">{{@ icons.play }}</div>
   </div>
   <div class="mu-player-audio">
     <div class="mu-player-info flex-align">

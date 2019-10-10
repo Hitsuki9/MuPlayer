@@ -1,4 +1,4 @@
-export default (options) => {
+export default options => {
   const defaultOptions = {
     container: document.querySelector('#mu-player'),
     mode: 'normal',
@@ -12,7 +12,7 @@ export default (options) => {
   }
 
   for (const option in defaultOptions) {
-    if (!options.hasOwnProperty(option)) {
+    if (!Object.prototype.hasOwnProperty.call(options, option)) {
       options[option] = defaultOptions[option]
     }
   }

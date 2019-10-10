@@ -1,7 +1,7 @@
-import play from '_svg/play.svg'
-import pause from '_svg/pause.svg'
-import volume from '_svg/volume.svg'
-import repeat from '_svg/repeat.svg'
+import play from '@svg/play.svg'
+import pause from '@svg/pause.svg'
+import volume from '@svg/volume.svg'
+import repeat from '@svg/repeat.svg'
 
 const icons = {
   play,

@@ -3,8 +3,8 @@ class Events {
     this.boundEvents = {}
     this.playerEvents = ['lrcshow', 'lrchide']
     this.audioEvents = [
-      'abort', 'canplay', 'canplaythrough', 'durationchange', 'emptied', 'ended', 'error', 'loadeddata', 
-      'loadedmetadata', 'loadstart', 'pause', 'play', 'playing', 'progress', 'ratechange', 'readystatechange', 
+      'abort', 'canplay', 'canplaythrough', 'durationchange', 'emptied', 'ended', 'error', 'loadeddata',
+      'loadedmetadata', 'loadstart', 'pause', 'play', 'playing', 'progress', 'ratechange', 'readystatechange',
       'seeked', 'seeking', 'stalled', 'suspend', 'timeupdate', 'volumechange', 'waiting'
     ]
   }
@@ -20,7 +20,7 @@ class Events {
 
   trigger (event, data) {
     if (this.boundEvents[event] && this.boundEvents[event].length) {
-      for (let callback of this.boundEvents[event]) {
+      for (const callback of this.boundEvents[event]) {
         callback(data)
       }
     }

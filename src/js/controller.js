@@ -1,4 +1,4 @@
-import utils from '_js/utils'
+import utils from '@js/utils'
 
 class Controller {
   constructor (player) {
@@ -9,7 +9,7 @@ class Controller {
   }
 
   initPlayBtn () {
-    this.player.template.cover.addEventListener('click', e => {
+    this.player.template.cover.addEventListener('click', () => {
       this.player.toggle()
     })
   }
@@ -33,7 +33,7 @@ class Controller {
       this.player.disableTimeupdate = false
     }
 
-    this.player.template.barWrap.addEventListener('mousedown', e => {
+    this.player.template.barWrap.addEventListener('mousedown', () => {
       this.player.disableTimeupdate = true
       document.addEventListener('mousemove', thumbMove)
       document.addEventListener('mouseup', thumbUp)
@@ -41,7 +41,7 @@ class Controller {
   }
 
   initVolumeBar () {
-    this.player.template.volume.addEventListener('click', e => {
+    this.player.template.volume.addEventListener('click', () => {
       if (this.player.audio.muted) {
         this.player.audio.muted = false
         this.player.bar.set('volume', this.player.volume(), 'height')

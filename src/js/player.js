@@ -1,13 +1,13 @@
-import handleOptions from '_js/options'
-import Template from '_js/template'
-import Lrc from '_js/lrc'
-import Events from '_js/events'
-import Storage from '_js/storage'
-import Controller from '_js/controller'
-import Bar from '_js/bar'
-import List from '_js/list'
-import utils from '_js/utils'
-import icons from '_js/icons'
+import handleOptions from '@js/options'
+import Template from '@js/template'
+import Lrc from '@js/lrc'
+import Events from '@js/events'
+import Storage from '@js/storage'
+import Controller from '@js/controller'
+import Bar from '@js/bar'
+import List from '@js/list'
+import utils from '@js/utils'
+import icons from '@js/icons'
 
 class MuPlayer {
   constructor (options = {}) {
@@ -16,18 +16,16 @@ class MuPlayer {
     this.paused = true
     this.disableTimeupdate = false
     this.btnTimer = 0
-    this.template = new Template({
-      container: this.container
-    })
+    this.template = new Template(this.options)
     this.storage = new Storage({
       storageName: this.options.storageName,
       volume: this.options.volume
     })
     if (this.options.lrcType) {
       this.lrc = new Lrc({
-          container: this.template.lrc,
-          async: this.options.lrcType === 1,
-          player: this
+        container: this.template.lrc,
+        async: this.options.lrcType === 1,
+        player: this
       })
     }
     this.events = new Events()
@@ -54,7 +52,7 @@ class MuPlayer {
   initAudio () {
     this.audio = document.createElement('audio')
     this.audio.preload = this.options.preload
-    for (let event of this.events.audioEvents) {
+    for (const event of this.events.audioEvents) {
       this.audio.addEventListener(event, e => {
         this.events.trigger(event, e)
       })
@@ -66,15 +64,15 @@ class MuPlayer {
   }
 
   bindEvents () {
-    this.on('canplay', e => {
+    this.on('canplay', () => {
       console.log(this.audio.buffered)
-      let percentage = this.audio.buffered.length ? this.audio.buffered.end(this.audio.buffered.length - 1) / this.audio.duration : 0
+      const percentage = this.audio.buffered.length ? this.audio.buffered.end(this.audio.buffered.length - 1) / this.audio.duration : 0
       this.bar.set('loaded', percentage, 'width')
     })
-    this.on('durationchange', e => {
+    this.on('durationchange', () => {
       this.template.dtime.innerHTML = this.audio.duration ? utils.secondsToTime(this.audio.duration) : '00:00'
     })
-    this.on('timeupdate', e => {
+    this.on('timeupdate', () => {
       if (!this.disableTimeupdate) {
         const percentage = this.audio.currentTime / this.audio.duration
         this.bar.set('played', percentage, 'width')
@@ -84,12 +82,12 @@ class MuPlayer {
         }
       }
     })
-    this.on('progress', e => {
+    this.on('progress', () => {
       console.log(this.audio.buffered)
-      let percentage = this.audio.buffered.length ? this.audio.buffered.end(this.audio.buffered.length - 1) / this.audio.duration : 0
+      const percentage = this.audio.buffered.length ? this.audio.buffered.end(this.audio.buffered.length - 1) / this.audio.duration : 0
       this.bar.set('loaded', percentage, 'width')
     })
-    this.on('error', e => {
+    this.on('error', () => {
       this.pause()
       console.error('An audio error has occurred')
     })
@@ -98,6 +96,7 @@ class MuPlayer {
   async play () {
     try {
       const playPromise = await this.audio.play()
+      console.log(playPromise)
       this.paused = false
       this.setPauseButton()
     } catch (error) {
@@ -110,9 +109,6 @@ class MuPlayer {
       clearTimeout(this.btnTimer)
     }
     this.template.btn.innerHTML = icons.play
-    if (this.template.btn.classList.contains('position-repair')) {
-      this.template.btn.classList.remove('position-repair')
-    }
     this.template.btn.classList.remove('mu-player-pause')
     this.template.btn.classList.add('mu-player-play')
   }
@@ -125,9 +121,7 @@ class MuPlayer {
 
   setPauseButton () {
     this.template.btn.innerHTML = icons.pause
-    this.template.btn.classList.add('position-repair')
     this.btnTimer = setTimeout(() => {
-      this.template.btn.classList.remove('position-repair')
       this.template.btn.classList.remove('mu-player-play')
       this.template.btn.classList.add('mu-player-pause')
       clearTimeout(this.btnTimer)

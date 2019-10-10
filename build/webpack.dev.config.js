@@ -1,8 +1,10 @@
 const webpack = require('webpack')
 const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const config = require('../config')
 
 module.exports = {
-  mode: 'development',
+  mode: config.dev.mode,
 
   entry: {
     'MuPlayer': path.resolve(__dirname, '../src/js/index.js')
@@ -13,36 +15,40 @@ module.exports = {
     filename: '[name].js',
     library: '[name]',
     libraryTarget: 'umd',
-    libraryExport: 'default',
-    umdNamedDefine: true
+    libraryExport: 'default'
   },
 
   resolve: {
     alias: {
-      '_js': path.resolve(__dirname, '../src/js'),
-      '_template': path.resolve(__dirname, '../src/template'),
-      '_css': path.resolve(__dirname, '../src/css'),
-      '_svg': path.resolve(__dirname, '../src/assets/svg')
+      '@js': path.resolve(__dirname, '../src/js'),
+      '@template': path.resolve(__dirname, '../src/template'),
+      '@css': path.resolve(__dirname, '../src/css'),
+      '@svg': path.resolve(__dirname, '../src/assets/svg')
     },
-    modules: ["node_modules"],
+    modules: ['node_modules'],
     extensions: ['.js']
   },
 
   module: {
     rules: [
       {
+        test: /\.js$/,
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        include: path.resolve(__dirname, '../src/js'),
+        options: {
+          formatter: require('eslint-friendly-formatter')
+        }
+      }, {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
+      }, {
         test: /\.scss$/,
         use: [
           'style-loader',
           'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              config: {
-                path: path.join(__dirname, 'postcss.config.js')
-              }
-            }
-          },
+          'postcss-loader',
           'sass-loader'
         ]
       }, {
@@ -56,7 +62,8 @@ module.exports = {
   },
 
   devServer: {
-    host: '0.0.0.0',
+    host: config.dev.host,
+    port: config.dev.port,
     compress: true,
     contentBase: path.resolve(__dirname, '../src'),
     open: true,
@@ -70,7 +77,10 @@ module.exports = {
 
   plugins: [
     new webpack.DefinePlugin({
-      VER: `"v${ require('../package.json').version }"`,
+      VER: JSON.stringify(`v${ require('../package.json').version }`),
+    }),
+    new HtmlWebpackPlugin({
+      template: 'index.html'
     })
   ]
 }

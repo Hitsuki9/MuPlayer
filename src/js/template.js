@@ -1,14 +1,14 @@
-import playerRender from '_template/player.art'
-import icons from '_js/icons'
+import playerRender from '@template/player.art'
+import icons from '@js/icons'
 
 class Template {
   constructor (options) {
     this.container = options.container
-    this.init()
+    this.init(options)
   }
-  init () {
+  init (options) {
     this.container.innerHTML = playerRender({
-      options: options,
+      options,
       icons
     })
 
