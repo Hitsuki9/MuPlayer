@@ -21,6 +21,7 @@ class Template {
     this.barWrap = this.container.querySelector('.mu-player-bar-wrap')
     this.loaded = this.container.querySelector('.mu-player-loaded')
     this.played = this.container.querySelector('.mu-player-played')
+    this.thumb = this.container.querySelector('.mu-player-thumb')
     this.dtime = this.container.querySelector('.mu-player-dtime')
     this.ptime = this.container.querySelector('.mu-player-ptime')
     this.volume = this.container.querySelector('.mu-player-icon-volume')

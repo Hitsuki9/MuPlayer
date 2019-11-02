@@ -25,8 +25,7 @@ module.exports = {
       '@css': path.resolve(__dirname, '../src/css'),
       '@svg': path.resolve(__dirname, '../src/assets/svg')
     },
-    modules: ['node_modules'],
-    extensions: ['.js']
+    modules: ['node_modules']
   },
 
   module: {

@@ -75,7 +75,7 @@ class MuPlayer {
     this.on('timeupdate', () => {
       if (!this.disableTimeupdate) {
         const percentage = this.audio.currentTime / this.audio.duration
-        this.bar.set('played', percentage, 'width')
+        this.bar.set('played', percentage, 'width', 'thumb')
         const currentTime = utils.secondsToTime(this.audio.currentTime)
         if (currentTime !== this.template.ptime.innerHTML) {
           this.template.ptime.innerHTML = currentTime
@@ -136,11 +136,11 @@ class MuPlayer {
     }
   }
 
-  skip (seconds) {
+  seek (seconds) {
     seconds = Math.max(seconds, 0)
     seconds = Math.min(seconds, this.audio.duration)
     this.audio.currentTime = seconds
-    this.bar.set('played', seconds / this.audio.duration, 'width')
+    this.bar.set('played', seconds / this.audio.duration, 'width', 'thumb')
     this.template.ptime.innerHTML = utils.secondsToTime(seconds)
   }
 

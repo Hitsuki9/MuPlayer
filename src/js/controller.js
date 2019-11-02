@@ -20,7 +20,7 @@ class Controller {
       percentage = Math.min(1, percentage)
       percentage = Math.max(0, percentage)
       this.player.template.ptime.innerHTML = utils.secondsToTime(percentage * this.player.audio.duration)
-      this.player.bar.set('played', percentage, 'width')
+      this.player.bar.set('played', percentage, 'width', 'thumb')
     }
 
     const thumbUp = e => {
@@ -29,7 +29,7 @@ class Controller {
       let percentage = (e.clientX - utils.getElementLeft(this.player.template.barWrap)) / this.player.template.barWrap.clientWidth
       percentage = Math.min(1, percentage)
       percentage = Math.max(0, percentage)
-      this.player.skip(percentage * this.player.audio.duration)
+      this.player.seek(percentage * this.player.audio.duration)
       this.player.disableTimeupdate = false
     }
 

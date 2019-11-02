@@ -1,0 +1,3 @@
+new Docute({
+  target: '#docute'
+})

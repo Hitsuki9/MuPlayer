@@ -113,29 +113,34 @@ $bar-background-color: #999;
   }
 
   .mu-player-bar {
-    height: 2px;
+    height: 2.5px;
     position: relative;
     background: #cdcdcd;
   }
 
   .mu-player-loaded {
     background: #aaa;
-    height: 2px;
     transition: all .3s ease;
   }
 
   .mu-player-played {
-    height: 2px;
+    
+  }
+
+  .mu-player-xed {
+    height: 2.5px;
     position: absolute;
     left: 0;
     top: 0;
+    width: 100%;
+    transform-origin: left top 0;
   }
 
   .mu-player-thumb {
-    position: absolute;
-    top: -4px;
-    right: -4px;
-    display: inline-block;
+    position: relative;
+    top: -3.75px;
+    left: -5px;
+    display: block;
     border-radius: 50%;
     width: 10px;
     height: 10px;
@@ -193,6 +198,16 @@ $bar-background-color: #999;
 
   .mu-player-list {
     overflow-y: auto;
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 3px;
+      background-color: #dedede;
+    }
+    // &::-webkit-scrollbar-thumb:hover {
+    //   background-color: #ccc;
+    // }
   }
 
   .mu-player-list ul {
