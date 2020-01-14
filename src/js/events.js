@@ -1,40 +1,60 @@
 class Events {
-  constructor () {
-    this.boundEvents = {}
-    this.playerEvents = ['lrcshow', 'lrchide']
+  constructor() {
+    this.boundEvents = {};
+    this.playerEvents = ['lrcshow', 'lrchide'];
     this.audioEvents = [
-      'abort', 'canplay', 'canplaythrough', 'durationchange', 'emptied', 'ended', 'error', 'loadeddata',
-      'loadedmetadata', 'loadstart', 'pause', 'play', 'playing', 'progress', 'ratechange', 'readystatechange',
-      'seeked', 'seeking', 'stalled', 'suspend', 'timeupdate', 'volumechange', 'waiting'
-    ]
+      'abort',
+      'canplay',
+      'canplaythrough',
+      'durationchange',
+      'emptied',
+      'ended',
+      'error',
+      'loadeddata',
+      'loadedmetadata',
+      'loadstart',
+      'pause',
+      'play',
+      'playing',
+      'progress',
+      'ratechange',
+      'readystatechange',
+      'seeked',
+      'seeking',
+      'stalled',
+      'suspend',
+      'timeupdate',
+      'volumechange',
+      'waiting'
+    ];
   }
 
-  on (event, callback) {
+  on(event, callback) {
     if (this.getEventType(event) && typeof callback === 'function') {
       if (!this.boundEvents[event]) {
-        this.boundEvents[event] = []
+        this.boundEvents[event] = [];
       }
-      this.boundEvents[event].push(callback)
+      this.boundEvents[event].push(callback);
     }
   }
 
-  trigger (event, data) {
+  trigger(event, data) {
     if (this.boundEvents[event] && this.boundEvents[event].length) {
       for (const callback of this.boundEvents[event]) {
-        callback(data)
+        callback(data);
       }
     }
   }
 
-  getEventType (event) {
+  getEventType(event) {
     if (this.playerEvents.includes(event)) {
-      return 'playerEvent'
+      return 'playerEvent';
     }
     if (this.audioEvents.includes(event)) {
-      return 'audioEvent'
+      return 'audioEvent';
     }
-    throw new Error(`Unknown event name: ${event}`)
+    throw new Error(`Unknown event name: ${event}`);
   }
 }
 
-export default Events
+export default Events;

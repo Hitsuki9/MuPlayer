@@ -1,8 +1,8 @@
-$bar-background-color: #999;
+@bar-background-color: #999;
 
 .mu-player {
   background: #fff;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
   border-radius: 2px;
   user-select: none;
 
@@ -24,9 +24,9 @@ $bar-background-color: #999;
   .mu-player-button {
     border-radius: 50%;
     position: absolute;
-    opacity: .8;
-    transition: opacity .3s ease;
-    background: rgba(0, 0, 0, .1);
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+    background: rgba(0, 0, 0, 0.1);
     svg {
       position: absolute;
       width: 70%;
@@ -50,7 +50,7 @@ $bar-background-color: #999;
       width: inherit;
       height: inherit;
       path {
-        transition: all .2s ease;
+        transition: all 0.2s ease;
         fill: #666;
       }
     }
@@ -71,7 +71,8 @@ $bar-background-color: #999;
     }
   }
 
-  .mu-player-play, .mu-player-pause {
+  .mu-player-play,
+  .mu-player-pause {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -120,11 +121,10 @@ $bar-background-color: #999;
 
   .mu-player-loaded {
     background: #aaa;
-    transition: all .3s ease;
+    transition: all 0.3s ease;
   }
 
   .mu-player-played {
-    
   }
 
   .mu-player-xed {
@@ -144,7 +144,7 @@ $bar-background-color: #999;
     border-radius: 50%;
     width: 10px;
     height: 10px;
-    transition: transform .5s ease;
+    transition: transform 0.5s ease;
     transform: scale(0);
   }
 
@@ -192,7 +192,7 @@ $bar-background-color: #999;
     height: 40px;
     background: #aaa;
     transform: scaleY(0);
-    transition: all .2s ease;
+    transition: all 0.2s ease;
     transform-origin: center bottom;
   }
 
@@ -219,7 +219,7 @@ $bar-background-color: #999;
       list-style-type: none;
       cursor: pointer;
       padding: 0 15px;
-      transition: all .4s ease;
+      transition: all 0.4s ease;
       border-top: 1px solid #e9e9e9;
       &:first-child {
         border-top: none;

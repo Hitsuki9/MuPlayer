@@ -1,3 +1,0 @@
-new Docute({
-  target: '#docute'
-})

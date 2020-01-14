@@ -1,13 +1,13 @@
-const webpack = require('webpack')
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const config = require('../config')
+const webpack = require('webpack');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const config = require('../config');
 
 module.exports = {
   mode: config.dev.mode,
 
   entry: {
-    'MuPlayer': path.resolve(__dirname, '../src/js/index.js')
+    MuPlayer: './src/js/index.js'
   },
 
   output: {
@@ -22,7 +22,7 @@ module.exports = {
     alias: {
       '@js': path.resolve(__dirname, '../src/js'),
       '@template': path.resolve(__dirname, '../src/template'),
-      '@css': path.resolve(__dirname, '../src/css'),
+      '@style': path.resolve(__dirname, '../src/style'),
       '@svg': path.resolve(__dirname, '../src/assets/svg')
     },
     modules: ['node_modules']
@@ -38,22 +38,21 @@ module.exports = {
         options: {
           formatter: require('eslint-friendly-formatter')
         }
-      }, {
+      },
+      {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/
-      }, {
-        test: /\.scss$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'postcss-loader',
-          'sass-loader'
-        ]
-      }, {
+      },
+      {
+        test: /\.less$/,
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
+      },
+      {
         test: /\.art$/,
         loader: 'art-template-loader'
-      }, {
+      },
+      {
         test: /\.svg$/,
         loader: 'svg-inline-loader'
       }
@@ -63,8 +62,8 @@ module.exports = {
   devServer: {
     host: config.dev.host,
     port: config.dev.port,
+    hot: true,
     compress: true,
-    contentBase: path.resolve(__dirname, '../src'),
     open: true,
     historyApiFallback: true,
     watchOptions: {
@@ -76,10 +75,10 @@ module.exports = {
 
   plugins: [
     new webpack.DefinePlugin({
-      VER: JSON.stringify(`v${ require('../package.json').version }`),
+      VER: JSON.stringify(`v${require('../package.json').version}`)
     }),
     new HtmlWebpackPlugin({
-      template: 'index.html'
+      template: 'public/index.html'
     })
   ]
-}
+};

@@ -1,7 +1,5 @@
 class Timer {
-  constructor () {
-
-  }
+  constructor() {}
 }
 
-export default Timer
+export default Timer;

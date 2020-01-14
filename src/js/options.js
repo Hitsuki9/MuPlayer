@@ -1,4 +1,4 @@
-export default options => {
+export default (options) => {
   const defaultOptions = {
     container: document.querySelector('#mu-player'),
     mode: 'normal',
@@ -9,13 +9,13 @@ export default options => {
     lrcType: 0,
     listMaxLength: 3,
     storageName: 'mu-player-setting'
-  }
+  };
 
   for (const option in defaultOptions) {
     if (!Object.prototype.hasOwnProperty.call(options, option)) {
-      options[option] = defaultOptions[option]
+      options[option] = defaultOptions[option];
     }
   }
 
-  return options
-}
+  return options;
+};

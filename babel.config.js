@@ -1,5 +1,5 @@
-module.exports = function (api) {
-  api.cache(true)
+module.exports = function(api) {
+  api.cache(true);
 
   const presets = [
     [
@@ -9,11 +9,11 @@ module.exports = function (api) {
         corejs: 3
       }
     ]
-  ]
-  const plugins = ['@babel/plugin-transform-runtime']
+  ];
+  const plugins = ['@babel/plugin-transform-runtime'];
 
   return {
     presets,
     plugins
-  }
-}
+  };
+};
