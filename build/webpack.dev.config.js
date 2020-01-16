@@ -73,6 +73,8 @@ module.exports = {
     quiet: true
   },
 
+  devtool: 'source-map',
+
   plugins: [
     new webpack.DefinePlugin({
       VER: JSON.stringify(`v${require('../package.json').version}`)
