@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --config build/webpack.dev.config.js",
+    "build": "webpack --config build/webpack.dev.config.js",
     "lint": "prettier --write \"./**/*.{js,json,less,md}\" & eslint \"./**/*.js\""
   },
   "keywords": [
@@ -40,6 +41,6 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.8.4",
-    "core-js": "^3.6.4"
+    "@babel/runtime-corejs3": "^7.8.4"
   }
 }

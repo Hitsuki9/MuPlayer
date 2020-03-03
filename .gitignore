@@ -2,3 +2,4 @@ node_modules
 src/assets/audio
 src/assets/cover
 src/assets/lrc
+dist
