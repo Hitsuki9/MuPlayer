@@ -3,7 +3,7 @@ module.exports = {
   dev: {
     mode: 'development',
     host: 'localhost',
-    port: 8080
+    port: 8888
   },
   prod: {}
 };

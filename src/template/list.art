@@ -1,4 +1,4 @@
-<ul style="max-height: {{ `${ $data.listMaxLength * 32 + $data.listMaxLength - 1}px` }}">
+<ul style="max-height: {{ $data.listMaxLength * 32 + $data.listMaxLength - 1 + 'px' }}">
   {{ each $data.audios }}
     <li class="flex-align">
       <span class="mu-player-list-index">{{ $index + 1 }}</span>

@@ -2,22 +2,20 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config = require('../config');
+const { name, expose, version } = require('../package.json');
 
 module.exports = {
   mode: config.dev.mode,
-
   entry: {
-    MuPlayer: './src/js/index.js'
+    [name]: './src/js/index.js'
   },
-
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].js',
-    library: '[name]',
+    library: expose,
     libraryTarget: 'umd',
     libraryExport: 'default'
   },
-
   resolve: {
     alias: {
       '@js': path.resolve(__dirname, '../src/js'),
@@ -27,7 +25,6 @@ module.exports = {
     },
     modules: ['node_modules']
   },
-
   module: {
     rules: [
       {
@@ -58,7 +55,6 @@ module.exports = {
       }
     ]
   },
-
   devServer: {
     host: config.dev.host,
     port: config.dev.port,
@@ -72,12 +68,10 @@ module.exports = {
     watchContentBase: true,
     quiet: true
   },
-
   devtool: 'source-map',
-
   plugins: [
     new webpack.DefinePlugin({
-      VER: JSON.stringify(`v${require('../package.json').version}`)
+      VER: JSON.stringify(`v${version}`)
     }),
     new HtmlWebpackPlugin({
       template: 'public/index.html'

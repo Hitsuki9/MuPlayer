@@ -1,12 +1,13 @@
 {
-  "name": "mu-player",
+  "name": "muplayer",
   "version": "0.0.1",
+  "expose": "MuPlayer",
   "description": "🎵 A HTML5 audio player which takes APlayer as reference",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --config build/webpack.dev.config.js",
     "build": "webpack --config build/webpack.dev.config.js",
-    "lint": "prettier --write \"./**/*.{js,json,less,md}\" & eslint \"./**/*.js\""
+    "lint": "prettier --write \"./**/*.{js,json,less,md}\" & eslint \"./src/**/*.js\""
   },
   "keywords": [
     "music",
@@ -40,7 +41,14 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
-    "@babel/runtime": "^7.8.4",
     "@babel/runtime-corejs3": "^7.8.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hitsuki9/MuPlayer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Hitsuki9/MuPlayer/issues"
+  },
+  "homepage": "https://github.com/Hitsuki9/MuPlayer#readme"
 }
