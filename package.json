@@ -22,7 +22,7 @@
     "@babel/preset-env": "^7.9.0",
     "art-template": "^4.13.2",
     "art-template-loader": "^1.4.3",
-    "autoprefixer": "^9.7.5",
+    "autoprefixer": "^9.7.6",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.5.0",
     "cssnano": "^4.1.10",
