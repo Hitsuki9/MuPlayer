@@ -13,8 +13,7 @@ module.exports = {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].js',
     library: expose,
-    libraryTarget: 'umd',
-    libraryExport: 'default'
+    libraryTarget: 'umd'
   },
   resolve: {
     alias: {
