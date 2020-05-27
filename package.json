@@ -41,7 +41,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "@babel/runtime-corejs3": "^7.9.6"
+    "@babel/runtime-corejs3": "^7.10.0"
   },
   "repository": {
     "type": "git",
