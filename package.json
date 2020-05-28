@@ -19,7 +19,7 @@
   "devDependencies": {
     "@babel/core": "^7.9.6",
     "@babel/plugin-transform-runtime": "^7.10.0",
-    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-env": "^7.10.1",
     "art-template": "^4.13.2",
     "art-template-loader": "^1.4.3",
     "autoprefixer": "^9.8.0",
