@@ -15,8 +15,9 @@ class Bar {
   set(type, percentage, widthOrHeight, bindThumb) {
     this.el[type].style.transform = `${map[widthOrHeight][0]}(${percentage})`;
     if (bindThumb) {
-      this.el[bindThumb].style[map[widthOrHeight][1]] = `calc(${percentage *
-        100}% - 5px)`;
+      this.el[bindThumb].style[map[widthOrHeight][1]] = `calc(${
+        percentage * 100
+      }% - 5px)`;
     }
   }
 }

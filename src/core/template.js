@@ -1,5 +1,5 @@
 import playerRender from '@template/player.art';
-import icons from '@js/icons';
+import icons from './icons';
 
 class Template {
   constructor(options) {

@@ -7,20 +7,20 @@ const { name, expose, version } = require('../package.json');
 module.exports = {
   mode: config.dev.mode,
   entry: {
-    [name]: './src/js/index.js'
+    [name]: './src/index.js'
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].js',
     library: expose,
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
+    libraryExport: 'default'
   },
   resolve: {
     alias: {
-      '@js': path.resolve(__dirname, '../src/js'),
       '@template': path.resolve(__dirname, '../src/template'),
       '@style': path.resolve(__dirname, '../src/style'),
-      '@svg': path.resolve(__dirname, '../src/assets/svg')
+      '@icon': path.resolve(__dirname, '../src/assets/svg')
     },
     modules: ['node_modules']
   },
@@ -70,7 +70,7 @@ module.exports = {
   devtool: 'source-map',
   plugins: [
     new webpack.DefinePlugin({
-      VER: JSON.stringify(`v${version}`)
+      __VERSION__: JSON.stringify(`v${version}`)
     }),
     new HtmlWebpackPlugin({
       template: 'public/index.html'

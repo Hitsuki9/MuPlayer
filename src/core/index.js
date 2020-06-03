@@ -1,13 +1,13 @@
-import handleOptions from '@js/options';
-import Template from '@js/template';
-import Lrc from '@js/lrc';
-import Events from '@js/events';
-import Storage from '@js/storage';
-import Controller from '@js/controller';
-import Bar from '@js/bar';
-import List from '@js/list';
-import utils from '@js/utils';
-import icons from '@js/icons';
+import handleOptions from './options';
+import Template from './template';
+import Lrc from './lrc';
+import Events from './events';
+import Storage from './storage';
+import Controller from './controller';
+import Bar from './bar';
+import List from './list';
+import icons from './icons';
+import utils from '../utils';
 
 class MuPlayer {
   constructor(options = {}) {
@@ -65,7 +65,7 @@ class MuPlayer {
 
   bindEvents() {
     this.on('canplay', () => {
-      console.log(this.audio.buffered);
+      // console.log(this.audio.buffered);
       const percentage = this.audio.buffered.length
         ? this.audio.buffered.end(this.audio.buffered.length - 1) /
           this.audio.duration
@@ -88,7 +88,7 @@ class MuPlayer {
       }
     });
     this.on('progress', () => {
-      console.log(this.audio.buffered);
+      // console.log(this.audio.buffered);
       const percentage = this.audio.buffered.length
         ? this.audio.buffered.end(this.audio.buffered.length - 1) /
           this.audio.duration
@@ -178,7 +178,7 @@ class MuPlayer {
   }
 
   static get version() {
-    return VER;
+    return __VERSION__;
   }
 }
 

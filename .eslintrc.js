@@ -49,6 +49,6 @@ module.exports = {
     quotes: [1, 'single']
   },
   globals: {
-    VER: true
+    __VERSION__: 'readonly'
   }
 };
