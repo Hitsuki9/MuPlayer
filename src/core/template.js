@@ -10,27 +10,27 @@ class Template {
     this.btnTimer = 0;
     this.init(options);
   }
+
   init(options) {
-    this.$container.innerHTML = playerRender({
+    const { $container } = this;
+    const query = getQuery($container);
+
+    $container.innerHTML = playerRender({
       options,
       icons
     });
 
-    this.$container.classList.add('mu-player');
+    $container.classList.add('mu-player');
     if (options.lrcType) {
-      this.$container.classList.add('mu-player-withlrc');
+      $container.classList.add('mu-player-withlrc');
     }
     if (options.audios.length > 1) {
-      this.$container.classList.add('mu-player-withlist');
+      $container.classList.add('mu-player-withlist');
     }
     if (options.mode === 'fixed') {
-      this.$container.classList.add('mu-player-fixed');
+      $container.classList.add('mu-player-fixed');
     }
 
-    const query = getQuery(this.$container);
-
-    this.$lrc = query('.mu-player-lrc');
-    this.$list = query('.mu-player-list');
     this.$cover = query('.mu-player-cover');
     this.$btn = query('.mu-player-button');
     this.$name = query('.mu-player-name');
@@ -43,22 +43,29 @@ class Template {
     this.$ptime = query('.mu-player-ptime');
     this.$volume = query('.mu-player-icon-volume');
     this.$volumeBar = query('.mu-player-volume');
+    this.$lrc = query('.mu-player-lrc');
+    this.$list = query('.mu-player-list');
   }
 
   setPlayButton() {
+    const { $btn } = this;
+
+    $btn.innerHTML = icons.play;
     if (this.btnTimer) {
       clearTimeout(this.btnTimer);
+      return;
     }
-    this.$btn.innerHTML = icons.play;
-    this.$btn.classList.remove('mu-player-pause');
-    this.$btn.classList.add('mu-player-play');
+    $btn.classList.remove('mu-player-pause');
+    $btn.classList.add('mu-player-play');
   }
 
   setPauseButton() {
-    this.$btn.innerHTML = icons.pause;
+    const { $btn } = this;
+
+    $btn.innerHTML = icons.pause;
     this.btnTimer = setTimeout(() => {
-      this.$btn.classList.remove('mu-player-play');
-      this.$btn.classList.add('mu-player-pause');
+      $btn.classList.remove('mu-player-play');
+      $btn.classList.add('mu-player-pause');
       clearTimeout(this.btnTimer);
     }, 800);
   }

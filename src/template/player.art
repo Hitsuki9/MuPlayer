@@ -1,27 +1,26 @@
 <div class="mu-player-body">
-  <div class="mu-player-cover" style="background-image: url('')">
-    <div class="flex-center mu-player-button mu-player-play">{{@ icons.play }}</div>
+  <div class="mu-player-cover flex-center pointer" style="background-image: url('')">
+    <div class="mu-player-button mu-player-play flex-center">{{@ icons.play }}</div>
   </div>
   <div class="mu-player-audio">
-    <div class="mu-player-info flex-align">
+    <div class="mu-player-info flex-v-center">
       <span class="mu-player-name">No Audio</span>
       <span class="mu-player-artist"> - (┬_┬)</span>
     </div>
 
     <div class="mu-player-lrc"></div>
 
-    <div class="mu-player-controller flex-align">
-      <div class="mu-player-bar-wrap">
+    <div class="mu-player-controller flex-v-center">
+      <div class="mu-player-bar-wrap pointer">
         <div class="mu-player-bar">
           <div class="mu-player-loaded mu-player-xed" style="transform: scaleX(0);"></div>
           <div class="mu-player-played mu-player-xed" style="transform: scaleX(0); background: lightblue;"></div>
           <span class="mu-player-thumb" style="background: lightblue;">
-            <!-- <span class="mu-player-loading-icon">{{@ icons.pause }}</span> -->
           </span>
         </div>
       </div>
 
-      <div class="mu-player-time-wrap flex-align">
+      <div class="mu-player-time-wrap flex-v-center">
         <span class="mu-player-time">
           <span class="mu-player-ptime">00:00</span> / <span class="mu-player-dtime">00:00</span>
         </span>
@@ -30,7 +29,7 @@
           <button type="button" class="mu-player-icon mu-player-icon-volume">
             {{@ icons.volume }}
           </button>
-          <div class="mu-player-volume-bar-wrap">
+          <div class="mu-player-volume-bar-wrap pointer">
             <div class="mu-player-volume-bar">
               <div class="mu-player-volume" style="height: 100%; background: lightblue;">
                 <div class="mu-player-volume-thumb"></div>

@@ -10,7 +10,7 @@
     box-sizing: content-box;
   }
 
-  .flex-align {
+  .flex-v-center {
     display: flex;
     align-items: center;
   }
@@ -21,39 +21,8 @@
     justify-content: center;
   }
 
-  .mu-player-button {
-    border-radius: 50%;
-    position: absolute;
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
-    background: rgba(0, 0, 0, 0.1);
-    svg {
-      position: absolute;
-      width: 70%;
-      height: 70%;
-      path {
-        fill: #fff;
-      }
-    }
-  }
-
-  .mu-player-icon {
-    width: 15px;
-    height: 15px;
-    padding: 0;
-    margin-left: 5px;
-    background: transparent;
-    border: none;
-    outline: none;
+  .pointer {
     cursor: pointer;
-    svg {
-      width: inherit;
-      height: inherit;
-      path {
-        transition: all 0.2s ease;
-        fill: #666;
-      }
-    }
   }
 
   .mu-player-body {
@@ -61,8 +30,6 @@
   }
 
   .mu-player-cover {
-    cursor: pointer;
-    position: relative;
     width: 70px;
     height: 70px;
     background-size: cover;
@@ -71,14 +38,24 @@
     }
   }
 
-  .mu-player-play,
-  .mu-player-pause {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  .mu-player-button {
     width: 26px;
     height: 26px;
     border: 2px solid #fff;
+    border-radius: 50%;
+    transition: opacity 0.3s ease;
+    background: rgba(0, 0, 0, 0.1);
+    .mu-icon {
+      width: 70%;
+      height: 70%;
+      path {
+        fill: #fff;
+      }
+    }
+  }
+
+  .mu-player-play {
+    opacity: 0.8;
   }
 
   .mu-player-pause {
@@ -86,7 +63,7 @@
   }
 
   .mu-player-audio {
-    flex-grow: 1;
+    flex: 1;
     padding: 15px 15px 0 15px;
   }
 
@@ -104,10 +81,11 @@
     margin-top: 10px;
   }
 
+  /* split */
+
   .mu-player-bar-wrap {
     flex-grow: 1;
     padding: 12px 0 10px;
-    cursor: pointer;
     &:hover .mu-player-thumb {
       transform: scale(1);
     }
@@ -127,7 +105,7 @@
   .mu-player-played {
   }
 
-  .mu-player-xed {
+  .mu-player-fixed {
     height: 2.5px;
     position: absolute;
     left: 0;
@@ -152,6 +130,25 @@
     margin-left: 5px;
     color: #999;
     font-size: 11px;
+  }
+
+  .mu-player-icon {
+    width: 15px;
+    height: 15px;
+    padding: 0;
+    margin-left: 5px;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    svg {
+      width: inherit;
+      height: inherit;
+      path {
+        transition: all 0.2s ease;
+        fill: #666;
+      }
+    }
   }
 
   .mu-player-volume-wrap {
@@ -180,7 +177,6 @@
     height: 40px;
     width: 2px;
     padding: 10px 10px 2px 5px;
-    cursor: pointer;
     position: absolute;
     bottom: 15px;
     left: 0;
@@ -244,6 +240,7 @@
     color: #888;
   }
 
+  // with lrc
   &.mu-player-withlrc {
     .mu-player-cover {
       width: 90px;
@@ -251,6 +248,7 @@
     }
   }
 
+  // with list
   &.mu-player-withlist {
     .mu-player-audio {
       border-bottom: 1px solid #e9e9e9;

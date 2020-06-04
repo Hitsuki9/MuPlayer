@@ -1,12 +1,11 @@
 module.exports = {
   extends: 'eslint:recommended',
   parserOptions: {
-    ecmaVersion: 8,
+    ecmaVersion: 9,
     sourceType: 'module'
   },
   env: {
-    browser: true,
-    node: true
+    browser: true
   },
   rules: {},
   globals: {

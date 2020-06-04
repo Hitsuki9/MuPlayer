@@ -1,22 +1,21 @@
+import { getStorage, setStorage } from '../utils';
+
 class Storage {
   constructor(mu) {
-    const { options } = mu;
-
-    this.storageName = options.storageName;
-    this.data = JSON.parse(localStorage.getItem(this.storageName));
-    if (!this.data) {
-      this.data = {};
-    }
-    this.data.volume = this.data.volume || options.volume;
+    this.name = mu.options.storageName;
   }
 
   get(key) {
-    return this.data[key];
+    const storage = getStorage(this.name);
+    return key ? storage[key] : storage;
   }
 
   set(key, value) {
-    this.data[key] = value;
-    localStorage.setItem(this.storageName, JSON.stringify(this.data));
+    const storage = {
+      ...this.get(),
+      [key]: value
+    };
+    setStorage(this.name, storage);
   }
 }
 

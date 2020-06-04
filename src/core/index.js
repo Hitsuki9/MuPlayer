@@ -17,12 +17,12 @@ class MuPlayer {
     this.disableTimeupdate = false;
     this.template = new Template(this);
     this.storage = new Storage(this);
-    if (this.options.lrcType) this.lrc = new Lrc(this);
     this.events = new Events();
     this.player = new Player(this);
     this.controller = new Controller(this);
     this.bar = new Bar(this);
     this.list = new List(this);
+    if (this.options.lrcType) this.lrc = new Lrc(this);
 
     this.bindEvents();
     this.list.cut(0);

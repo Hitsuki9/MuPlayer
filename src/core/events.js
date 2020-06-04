@@ -1,6 +1,6 @@
 class Events {
   constructor() {
-    this.boundEvents = {};
+    this.listeners = {};
     this.playerEvents = ['lrcshow', 'lrchide'];
     this.audioEvents = [
       'abort',
@@ -31,19 +31,27 @@ class Events {
 
   on(event, callback) {
     if (this.getEventType(event) && typeof callback === 'function') {
-      if (!this.boundEvents[event]) {
-        this.boundEvents[event] = [];
+      if (!this.listeners[event]) {
+        this.listeners[event] = [];
       }
-      this.boundEvents[event].push(callback);
+      this.listeners[event].push(callback);
     }
   }
 
-  trigger(event, data) {
-    if (this.boundEvents[event] && this.boundEvents[event].length) {
-      for (const callback of this.boundEvents[event]) {
+  once(event, callback) {
+    // TODO
+  }
+
+  emit(event, ...args) {
+    if (this.listeners[event] && this.listeners[event].length) {
+      for (const callback of this.listeners[event]) {
         callback(data);
       }
     }
+  }
+
+  off(event, callback) {
+    // TODO
   }
 
   getEventType(event) {
