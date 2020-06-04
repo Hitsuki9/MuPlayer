@@ -1,4 +1,4 @@
-export default (options) => {
+export default function initOptions(options) {
   const defaultOptions = {
     container: document.querySelector('#mu-player'),
     mode: 'normal',
@@ -18,4 +18,4 @@ export default (options) => {
   }
 
   return options;
-};
+}

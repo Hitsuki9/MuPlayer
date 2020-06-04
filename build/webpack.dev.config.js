@@ -61,10 +61,6 @@ module.exports = {
     compress: true,
     open: true,
     historyApiFallback: true,
-    watchOptions: {
-      ignored: /node_modules/
-    },
-    watchContentBase: true,
     quiet: true
   },
   devtool: 'source-map',

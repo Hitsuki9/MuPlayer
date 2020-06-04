@@ -1,15 +1,55 @@
 export default class Player {
-  constructor() {
-    // TODO
+  constructor(mu) {
+    const {
+      options: { preload },
+      events,
+      template
+    } = mu;
+
+    this.audio = null;
+    this.paused = true;
+    this.template = template;
+    this.initAudio(preload);
+    this.bindEvents(events);
   }
 
-  initAudio() {}
+  initAudio(preload) {
+    this.audio = document.createElement('audio');
+    this.audio.preload = preload;
+  }
 
-  setAudio() {}
+  bindEvents(events) {
+    const { audioEvents } = events;
 
-  play() {}
+    audioEvents.forEach((eventName) => {
+      this.audio.addEventListener(
+        eventName,
+        (event) => {
+          events.trigger(eventName, event);
+        },
+        false
+      );
+    });
+  }
 
-  pause() {}
+  setAudio(audio) {
+    this.audio.src = audio.url;
+  }
 
-  toggle() {}
+  play() {
+    this.audio.play();
+    this.paused = false;
+    this.template.setPauseButton();
+  }
+
+  pause() {
+    this.audio.pause();
+    this.paused = true;
+    this.template.setPlayButton();
+  }
+
+  toggle() {
+    if (this.paused) this.play();
+    else this.pause();
+  }
 }

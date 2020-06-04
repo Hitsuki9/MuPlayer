@@ -1,13 +1,14 @@
 class List {
-  constructor(player) {
-    this.player = player;
-    this.audios = player.options.audios;
+  constructor(mu) {
+    this.mu = mu;
     this.index = 0;
     this.bindEvents();
   }
 
   bindEvents() {
-    this.player.template.list.addEventListener('click', (e) => {
+    const { template, player } = this.mu;
+
+    template.$list.addEventListener('click', (e) => {
       let target = null;
       if (e.target.tagName === 'LI') {
         target = e.target;
@@ -20,25 +21,31 @@ class List {
         ) - 1;
       if (audioIndex !== this.index) {
         this.cut(audioIndex);
-        this.player.play();
+        player.play();
       } else {
-        this.player.toggle();
+        player.toggle();
       }
     });
   }
 
   cut(index) {
-    if (this.audios[index]) {
+    const {
+      template,
+      player,
+      options: { audios }
+    } = this.mu;
+
+    if (audios[index]) {
       this.index = index;
-      const audio = this.audios[this.index];
-      this.player.template.cover.style.backgroundImage = audio.cover
+      const audio = audios[this.index];
+      template.$cover.style.backgroundImage = audio.cover
         ? `url('${audio.cover}')`
         : '';
-      this.player.template.name.innerHTML = audio.name || '未知音频';
-      this.player.template.artist.innerHTML = audio.artist
+      template.$name.innerHTML = audio.name || '未知音频';
+      template.$artist.innerHTML = audio.artist
         ? ` - ${audio.artist}`
         : ' - 未知作者';
-      this.player.setAudio(audio);
+      player.setAudio(audio);
     }
   }
 }

@@ -1,66 +1,31 @@
-import handleOptions from './options';
+import initOptions from './options';
 import Template from './template';
 import Lrc from './lrc';
 import Events from './events';
+import Player from './player';
 import Storage from './storage';
 import Controller from './controller';
 import Bar from './bar';
 import List from './list';
-import icons from './icons';
-import utils from '../utils';
+import { secondsToTime } from '../utils';
+
+// const instances = [];
 
 class MuPlayer {
   constructor(options = {}) {
-    this.options = handleOptions(options);
-    this.container = this.options.container;
-    this.paused = true;
+    this.options = initOptions(options);
     this.disableTimeupdate = false;
-    this.btnTimer = 0;
-    this.template = new Template(this.options);
-    this.storage = new Storage({
-      storageName: this.options.storageName,
-      volume: this.options.volume
-    });
-    if (this.options.lrcType) {
-      this.lrc = new Lrc({
-        container: this.template.lrc,
-        async: this.options.lrcType === 1,
-        player: this
-      });
-    }
+    this.template = new Template(this);
+    this.storage = new Storage(this);
+    if (this.options.lrcType) this.lrc = new Lrc(this);
     this.events = new Events();
+    this.player = new Player(this);
     this.controller = new Controller(this);
-    this.bar = new Bar(this.template);
+    this.bar = new Bar(this);
     this.list = new List(this);
 
-    this.container.classList.add('mu-player');
-    if (this.options.lrcType) {
-      this.container.classList.add('mu-player-withlrc');
-    }
-    if (this.options.audios.length > 1) {
-      this.container.classList.add('mu-player-withlist');
-    }
-    if (this.options.mode === 'fixed') {
-      this.container.classList.add('mu-player-fixed');
-    }
-
-    this.initAudio();
     this.bindEvents();
     this.list.cut(0);
-  }
-
-  initAudio() {
-    this.audio = document.createElement('audio');
-    this.audio.preload = this.options.preload;
-    for (const event of this.events.audioEvents) {
-      this.audio.addEventListener(event, (e) => {
-        this.events.trigger(event, e);
-      });
-    }
-  }
-
-  setAudio(audio) {
-    this.audio.src = audio.url;
   }
 
   bindEvents() {
@@ -73,17 +38,17 @@ class MuPlayer {
       this.bar.set('loaded', percentage, 'width');
     });
     this.on('durationchange', () => {
-      this.template.dtime.innerHTML = this.audio.duration
-        ? utils.secondsToTime(this.audio.duration)
+      this.template.$dtime.innerHTML = this.audio.duration
+        ? secondsToTime(this.audio.duration)
         : '00:00';
     });
     this.on('timeupdate', () => {
       if (!this.disableTimeupdate) {
         const percentage = this.audio.currentTime / this.audio.duration;
         this.bar.set('played', percentage, 'width', 'thumb');
-        const currentTime = utils.secondsToTime(this.audio.currentTime);
-        if (currentTime !== this.template.ptime.innerHTML) {
-          this.template.ptime.innerHTML = currentTime;
+        const currentTime = secondsToTime(this.audio.currentTime);
+        if (currentTime !== this.template.$ptime.innerHTML) {
+          this.template.$ptime.innerHTML = currentTime;
         }
       }
     });
@@ -101,55 +66,12 @@ class MuPlayer {
     });
   }
 
-  async play() {
-    try {
-      const playPromise = await this.audio.play();
-      console.log(playPromise);
-      this.paused = false;
-      this.setPauseButton();
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  setPlayButton() {
-    if (this.btnTimer) {
-      clearTimeout(this.btnTimer);
-    }
-    this.template.btn.innerHTML = icons.play;
-    this.template.btn.classList.remove('mu-player-pause');
-    this.template.btn.classList.add('mu-player-play');
-  }
-
-  pause() {
-    this.audio.pause();
-    this.paused = true;
-    this.setPlayButton();
-  }
-
-  setPauseButton() {
-    this.template.btn.innerHTML = icons.pause;
-    this.btnTimer = setTimeout(() => {
-      this.template.btn.classList.remove('mu-player-play');
-      this.template.btn.classList.add('mu-player-pause');
-      clearTimeout(this.btnTimer);
-    }, 800);
-  }
-
-  toggle() {
-    if (this.paused) {
-      this.play();
-    } else {
-      this.pause();
-    }
-  }
-
   seek(seconds) {
     seconds = Math.max(seconds, 0);
     seconds = Math.min(seconds, this.audio.duration);
     this.audio.currentTime = seconds;
     this.bar.set('played', seconds / this.audio.duration, 'width', 'thumb');
-    this.template.ptime.innerHTML = utils.secondsToTime(seconds);
+    this.template.$ptime.innerHTML = secondsToTime(seconds);
   }
 
   cutAudio(index) {

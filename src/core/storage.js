@@ -1,5 +1,7 @@
 class Storage {
-  constructor(options) {
+  constructor(mu) {
+    const { options } = mu;
+
     this.storageName = options.storageName;
     this.data = JSON.parse(localStorage.getItem(this.storageName));
     if (!this.data) {

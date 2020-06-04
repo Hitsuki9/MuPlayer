@@ -1,59 +1,65 @@
-import utils from '../utils';
+import { getElementLeft, secondsToTime } from '../utils';
 
 class Controller {
-  constructor(player) {
-    this.player = player;
+  constructor(mu) {
+    this.mu = mu;
     this.initPlayBtn();
     this.initPlayBar();
     this.initVolumeBar();
   }
 
   initPlayBtn() {
-    this.player.template.cover.addEventListener('click', () => {
-      this.player.toggle();
+    const { template, player } = this.mu;
+
+    template.$cover.addEventListener('click', () => {
+      player.toggle();
     });
   }
 
   initPlayBar() {
+    const { template, player, bar } = this.mu;
+
     const thumbMove = (e) => {
       let percentage =
-        (e.clientX - utils.getElementLeft(this.player.template.barWrap)) /
-        this.player.template.barWrap.clientWidth;
+        (e.clientX - getElementLeft(template.$barWrap)) /
+        template.$barWrap.clientWidth;
       percentage = Math.min(1, percentage);
       percentage = Math.max(0, percentage);
-      this.player.template.ptime.innerHTML = utils.secondsToTime(
-        percentage * this.player.audio.duration
+      template.$ptime.innerHTML = secondsToTime(
+        percentage * player.audio.duration
       );
-      this.player.bar.set('played', percentage, 'width', 'thumb');
+      bar.set('played', percentage, 'width', 'thumb');
     };
 
     const thumbUp = (e) => {
       document.removeEventListener('mousemove', thumbMove);
       document.removeEventListener('mouseup', thumbUp);
       let percentage =
-        (e.clientX - utils.getElementLeft(this.player.template.barWrap)) /
-        this.player.template.barWrap.clientWidth;
+        (e.clientX - getElementLeft(template.$barWrap)) /
+        template.$barWrap.clientWidth;
       percentage = Math.min(1, percentage);
       percentage = Math.max(0, percentage);
-      this.player.seek(percentage * this.player.audio.duration);
-      this.player.disableTimeupdate = false;
+      this.mu.seek(percentage * this.player.audio.duration);
+      this.mu.disableTimeupdate = false;
     };
 
-    this.player.template.barWrap.addEventListener('mousedown', () => {
-      this.player.disableTimeupdate = true;
+    template.$barWrap.addEventListener('mousedown', () => {
+      this.mu.disableTimeupdate = true;
       document.addEventListener('mousemove', thumbMove);
       document.addEventListener('mouseup', thumbUp);
     });
   }
 
   initVolumeBar() {
-    this.player.template.volume.addEventListener('click', () => {
-      if (this.player.audio.muted) {
-        this.player.audio.muted = false;
-        this.player.bar.set('volume', this.player.volume(), 'height');
+    const { template, player, bar } = this.mu;
+
+    template.$volume.addEventListener('click', () => {
+      if (player.audio.muted) {
+        player.audio.muted = false;
+        bar.set('volume', this.mu.volume(), 'height');
       } else {
-        this.player.audio.muted = true;
-        this.player.bar.set('volume', 0, 'height');
+        player.audio.muted = true;
+        bar.set('volume', 0, 'height');
       }
     });
   }

@@ -1,6 +1,6 @@
 {
   "name": "muplayer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "expose": "MuPlayer",
   "description": "🎵 A HTML5 audio player which takes APlayer as reference",
   "main": "index.js",
@@ -36,6 +36,7 @@
     "prettier": "^2.0.5",
     "style-loader": "^1.2.1",
     "svg-inline-loader": "^0.8.2",
+    "vuepress": "^1.5.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0"
