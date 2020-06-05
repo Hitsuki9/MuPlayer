@@ -67,6 +67,7 @@ const options = {
     }
   ],
   lrcType: 0,
+  autoplay: true,
   listMaxLength: 8
 };
-const muPlayer = new MuPlayer(options);
+const mu = new MuPlayer(options);

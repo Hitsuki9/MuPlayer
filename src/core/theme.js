@@ -1,5 +1,3 @@
-class Theme {
+export default class Theme {
   constructor() {}
 }
-
-export default Theme;

@@ -1,7 +1,5 @@
-class Lrc {
+export default class Lrc {
   constructor(mu) {
     this.mu = mu;
   }
 }
-
-export default Lrc;

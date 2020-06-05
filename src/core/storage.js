@@ -1,22 +1,17 @@
 import { getStorage, setStorage } from '../utils';
 
-class Storage {
+export default class Storage {
   constructor(mu) {
     this.name = mu.options.storageName;
+    this.storage = getStorage(this.name);
   }
 
   get(key) {
-    const storage = getStorage(this.name);
-    return key ? storage[key] : storage;
+    return key ? this.storage[key] : this.storage;
   }
 
   set(key, value) {
-    const storage = {
-      ...this.get(),
-      [key]: value
-    };
-    setStorage(this.name, storage);
+    this.storage[key] = value;
+    setStorage(this.name, this.storage);
   }
 }
-
-export default Storage;

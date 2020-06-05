@@ -1,27 +1,29 @@
-const map = {
-  width: ['scaleX', 'left'],
-  height: ['scaleY', 'bottom']
+const DirectionMap = {
+  horz: ['scaleX', 'left'],
+  vert: ['scaleY', 'bottom']
 };
 
-class Bar {
-  constructor(mu) {
-    const { template } = mu;
+const THUMB_RADIUS = 5;
 
-    this.el = {};
-    this.el.played = template.$played;
-    this.el.loaded = template.$loaded;
-    this.el.thumb = template.$thumb;
-    this.el.volume = template.$volumeBar;
+export default class Bar {
+  constructor(template) {
+    this.el = {
+      played: template.$played,
+      loaded: template.$loaded,
+      thumb: template.$thumb,
+      volume: template.$volumeBar
+    };
   }
 
-  set(type, percentage, widthOrHeight, bindThumb) {
-    this.el[type].style.transform = `${map[widthOrHeight][0]}(${percentage})`;
-    if (bindThumb) {
-      this.el[bindThumb].style[map[widthOrHeight][1]] = `calc(${
+  set(elName, percentage, direction, cascadedThumb) {
+    const [scale, position] = DirectionMap[direction];
+
+    this.el[elName].style.transform = `${scale}(${percentage})`;
+
+    if (cascadedThumb) {
+      this.el[cascadedThumb].style[position] = `calc(${
         percentage * 100
-      }% - 5px)`;
+      }% - ${THUMB_RADIUS}px)`;
     }
   }
 }
-
-export default Bar;

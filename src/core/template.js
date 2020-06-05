@@ -1,13 +1,12 @@
 import playerRender from '@template/player.art';
+import Bar from './bar';
 import icons from './icons';
 import { getQuery } from '../utils';
 
-class Template {
-  constructor(mu) {
-    const { options } = mu;
-
+export default class Template {
+  constructor({ options }, state) {
+    this._localState = state;
     this.$container = options.container;
-    this.btnTimer = 0;
     this.init(options);
   }
 
@@ -45,14 +44,19 @@ class Template {
     this.$volumeBar = query('.mu-player-volume');
     this.$lrc = query('.mu-player-lrc');
     this.$list = query('.mu-player-list');
+
+    this.bar = new Bar(this);
   }
 
   setPlayButton() {
-    const { $btn } = this;
+    const {
+      _localState: { btnTimer },
+      $btn
+    } = this;
 
     $btn.innerHTML = icons.play;
-    if (this.btnTimer) {
-      clearTimeout(this.btnTimer);
+    if (btnTimer) {
+      clearTimeout(btnTimer);
       return;
     }
     $btn.classList.remove('mu-player-pause');
@@ -60,15 +64,13 @@ class Template {
   }
 
   setPauseButton() {
-    const { $btn } = this;
+    const { _localState, $btn } = this;
 
     $btn.innerHTML = icons.pause;
-    this.btnTimer = setTimeout(() => {
+    _localState.btnTimer = setTimeout(() => {
       $btn.classList.remove('mu-player-play');
       $btn.classList.add('mu-player-pause');
-      clearTimeout(this.btnTimer);
+      _localState.btnTimer = 0;
     }, 800);
   }
 }
-
-export default Template;

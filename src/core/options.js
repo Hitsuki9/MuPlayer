@@ -8,7 +8,7 @@ export default function initOptions(options) {
     audios: [],
     lrcType: 0,
     listMaxLength: 3,
-    storageName: 'mu-player-setting'
+    storageName: '@@mu/SETTING'
   };
 
   for (const option in defaultOptions) {

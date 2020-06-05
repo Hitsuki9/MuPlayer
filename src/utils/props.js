@@ -5,6 +5,9 @@
  * @param {*} methods
  */
 export function proxyMethods(target, source, methods) {
-  // TODO
-  console.log(target, source, methods);
+  methods.forEach((method) => {
+    if (source[method]) {
+      target[method] = (...args) => source[method](...args);
+    }
+  });
 }

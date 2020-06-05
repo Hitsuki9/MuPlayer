@@ -1,5 +1,3 @@
-class Timer {
+export default class Timer {
   constructor() {}
 }
-
-export default Timer;

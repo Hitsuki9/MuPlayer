@@ -1,39 +1,15 @@
-class List {
+export default class List {
   constructor(mu) {
-    this.mu = mu;
+    this._mu = mu;
+    this.audios = mu.options.audios;
     this.index = 0;
-    this.bindEvents();
   }
 
-  bindEvents() {
-    const { template, player } = this.mu;
+  switch(index) {
+    const { audios } = this;
+    const { template, player, events } = this._mu;
 
-    template.$list.addEventListener('click', (e) => {
-      let target = null;
-      if (e.target.tagName === 'LI') {
-        target = e.target;
-      } else {
-        target = e.target.parentNode;
-      }
-      const audioIndex =
-        parseInt(
-          target.getElementsByClassName('mu-player-list-index')[0].innerHTML
-        ) - 1;
-      if (audioIndex !== this.index) {
-        this.cut(audioIndex);
-        player.play();
-      } else {
-        player.toggle();
-      }
-    });
-  }
-
-  cut(index) {
-    const {
-      template,
-      player,
-      options: { audios }
-    } = this.mu;
+    events.emit('listswitch', index);
 
     if (audios[index]) {
       this.index = index;
@@ -49,5 +25,3 @@ class List {
     }
   }
 }
-
-export default List;
