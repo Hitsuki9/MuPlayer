@@ -7,12 +7,12 @@ import Events from './events';
 import Controller from './controller';
 import List from './list';
 import Lrc from './lrc';
-import { proxyMethods } from '../utils';
+import { initProxy } from '../utils';
 
 // const instances = [];
 let i = 1;
 
-export default class MuPlayer {
+class MuPlayer {
   _uid = i++;
   constructor(options = {}) {
     const state = bindLocalState(this._uid);
@@ -25,11 +25,7 @@ export default class MuPlayer {
     this.controller = new Controller(this, state);
     this.list = new List(this);
     if (this.options.lrcType) this.lrc = new Lrc(this);
-
-    proxyMethods(this, this.player, ['play', 'pause', 'toggle', 'seek']);
-    proxyMethods(this, this.events, ['on', 'off', 'once', 'emit']);
-    proxyMethods(this, this.list, ['switch']);
-    this.switch(0);
+    this.list.switch(0);
     console.log(this);
   }
 
@@ -37,3 +33,12 @@ export default class MuPlayer {
     return __VERSION__;
   }
 }
+
+initProxy(
+  MuPlayer,
+  ['player', ['play', 'pause', 'toggle']],
+  ['events', ['on', 'once', 'off', 'emit']],
+  ['list', ['switch']]
+);
+
+export default MuPlayer;

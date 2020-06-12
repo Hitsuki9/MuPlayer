@@ -4,7 +4,7 @@ export default class Player {
   constructor(mu) {
     this._mu = mu;
     this.audio = null;
-    this.paused = true;
+    this.paused = false;
     this.initAudio(mu.options);
   }
 
@@ -29,18 +29,14 @@ export default class Player {
 
   play() {
     this.audio.play();
-    this.paused = false;
-    // this._mu.template.setPauseButton();
   }
 
   pause() {
     this.audio.pause();
-    this.paused = true;
-    // this._mu.template.setPlayButton();
   }
 
   toggle() {
-    if (this.paused) this.play();
+    if (this.audio.paused) this.play();
     else this.pause();
   }
 
