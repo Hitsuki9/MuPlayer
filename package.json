@@ -29,7 +29,7 @@
     "eslint": "^7.6.0",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^4.0.2",
-    "html-webpack-plugin": "^4.3.0",
+    "html-webpack-plugin": "^4.4.1",
     "less": "^3.12.2",
     "less-loader": "^6.2.0",
     "postcss-loader": "^3.0.0",
